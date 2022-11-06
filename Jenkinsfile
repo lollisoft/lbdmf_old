@@ -49,6 +49,7 @@ pipeline {
                         sh "cp thirdparty/log4cplus-1.2.0-rc5.tar.gz ./Projects/CPP/vendor"
                         sh "cp thirdparty/libxslt-1.1.21.tar.gz ./Projects/CPP/vendor"
                         sh "cp thirdparty/libxml2-2.8.0.tar.gz ./Projects/CPP/vendor"
+                        sh "./Projects/CPP/jenkinsbuild-osx.sh"
                     }
                 }
             }
