@@ -62,6 +62,8 @@ if [ $OSVERSION = 18.2.0 ]; then
 OSNAME=Leopard
 fi
 
+fi
+
 echo $OSNAME
 
 $CPP mkmk.cpp -c -DOSX -DOSNAME_$OSNAME \
