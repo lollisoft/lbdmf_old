@@ -1024,6 +1024,12 @@ ifeq ($(OSVERSION_), 10.8.0)
 OSNAME=Leopard
 endif
 
+# Adding Mac OS X Mojave as a Leopard build environment for the moment
+
+ifeq ($(OSVERSION_), 18.2.0)
+OSNAME=Leopard
+endif
+
 endif
 
 ifeq ($(OSTYPE), Windows_NT)
