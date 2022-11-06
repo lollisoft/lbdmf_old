@@ -56,6 +56,10 @@ if [ $OSVERSION = 10.8.0 ]; then
 OSNAME=Leopard
 fi
 
+# Adding Mac OS X Mojave as a Leopard build environment for the moment
+
+if [ $OSVERSION = 18.2.0 ]; then
+OSNAME=Leopard
 fi
 
 echo $OSNAME
