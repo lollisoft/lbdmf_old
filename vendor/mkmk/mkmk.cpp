@@ -2507,12 +2507,8 @@ void WriteDep(FILE *f, char *Name, TIncludeParser *p)
 
   replace(ObjNameC, "/", "\\\\");
 
-  fprintf(stderr, "List files.\n");
-
   ListFiles(f,Line,&p->l);
   int len;
-
-  fprintf(stderr, "Decide target type.\n");
 
   switch (targettype) {
         case IDL_TARGET:
@@ -2840,20 +2836,17 @@ void DoDep(FILE *f, TDepItem *d, char** iPathList, int count)
   TIncludeParser p;
   char FileName[256];
 
-  fprintf(stderr, "Prepare filename.\n");
   strcpy(FileName,d->Path);
   strcat(FileName,d->Name);
 
   p.setIncludes(iPathList, count);
 
-  fprintf(stderr, "Parse.\n");
   p.Parse(FileName);
 
   char fullName[1000] = "";
 
   strcpy(fullName, d->Path);
   strcat(fullName, d->Name);
-  fprintf(stderr, "Write dep.\n");
   WriteDep(f,fullName,&p);
 #ifdef VERBOSE
   printf("Warning: Using hardcoded char array.\n");
