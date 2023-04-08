@@ -1046,6 +1046,17 @@ endif
 Path=$(PATH)
 
 
+ifeq ($(OSTYPE), Windows_NT)
+PATH_SEP=\\
+MKDIR=cmd /c mkdir 
+endif
+
+ifneq ($(OSTYPE), Windows_NT)
+PATH_SEP=\
+MKDIR=mkdir
+endif
+
+
 #
 # The BASEDIRECTORIES is intended to hook in other projects into the directory structure.
 # This means, that these directories are for general intent. I would create some modules,
@@ -1760,10 +1771,10 @@ install-strip:
 	for sub_target in $(ALLDIRS); do \
 		$(MAKE) -C $$sub_target install-strip; \
 	done
-	echo mkdir -p $(prefix)/lib
-	mkdir -p $(prefix)/share
-	mkdir -p $(prefix)/share/lbdmf
-	mkdir -p $(prefix)/share/lbdmf/toolbarimages
+	echo $(MKDIR) -p $(prefix)/lib
+	$(MKDIR) -p $(prefix)/share
+	$(MKDIR) -p $(prefix)/share/lbdmf
+	$(MKDIR) -p $(prefix)/share/lbdmf/toolbarimages
 	cp $(DEVROOT_MAKE)$(RELPATH)/Test/GUI/wxWrapper/toolbarimages/*.png $(prefix)/share/lbdmf/toolbarimages
 	cp $(DEVROOT_MAKE)$(RELPATH)/Test/GUI/wxWrapper/toolbarimages/*.xpm $(prefix)/share/lbdmf/toolbarimages
 
@@ -1775,22 +1786,22 @@ install:
 	for sub_target in $(ALLDIRS); do \
 		$(MAKE) -C $$sub_target install; \
 	done
-	echo mkdir -p $(prefix)/lib
-	mkdir -p $(prefix)/share
-	mkdir -p $(prefix)/share/lbdmf
-	mkdir -p $(prefix)/share/applications
-	mkdir -p $(prefix)/share/lbdmf/toolbarimages
-	mkdir -p $(prefix)/share/lbdmf/UMLSamples
-	mkdir -p $(prefix)/share/lbdmf/Doc
-	mkdir -p $(prefix)/share/lbdmf/include
-	mkdir -p $(prefix)/share/lbdmf/XMIToDMF
-	mkdir -p $(prefix)/share/lbdmf/DMFToXMI
-	mkdir -p $(prefix)/share/lbdmf/database
-	mkdir -p $(prefix)/share/lbdmf/TurboVision
-	mkdir -p $(prefix)/share/lbdmf/wxLua
-	mkdir -p $(prefix)/share/lbdmf/wxActiveRecords
-	mkdir -p $(prefix)/share/lbdmf/lbDMFDataViewModel
-	mkdir -p $(prefix)/share/lbdmf/lbDMFFixedFormular
+	echo $(MKDIR) -p $(prefix)/lib
+	$(MKDIR) -p $(prefix)/share
+	$(MKDIR) -p $(prefix)/share/lbdmf
+	$(MKDIR) -p $(prefix)/share/applications
+	$(MKDIR) -p $(prefix)/share/lbdmf/toolbarimages
+	$(MKDIR) -p $(prefix)/share/lbdmf/UMLSamples
+	$(MKDIR) -p $(prefix)/share/lbdmf/Doc
+	$(MKDIR) -p $(prefix)/share/lbdmf/include
+	$(MKDIR) -p $(prefix)/share/lbdmf/XMIToDMF
+	$(MKDIR) -p $(prefix)/share/lbdmf/DMFToXMI
+	$(MKDIR) -p $(prefix)/share/lbdmf/database
+	$(MKDIR) -p $(prefix)/share/lbdmf/TurboVision
+	$(MKDIR) -p $(prefix)/share/lbdmf/wxLua
+	$(MKDIR) -p $(prefix)/share/lbdmf/wxActiveRecords
+	$(MKDIR) -p $(prefix)/share/lbdmf/lbDMFDataViewModel
+	$(MKDIR) -p $(prefix)/share/lbdmf/lbDMFFixedFormular
 	cp $(DEVROOT_MAKE)$(RELPATH)/Database/*.sql $(prefix)/share/lbdmf/database
 	cp $(DEVROOT_MAKE)$(RELPATH)/Test/GUI/wxWrapper/toolbarimages/*.png $(prefix)/share/lbdmf/toolbarimages
 	cp $(DEVROOT_MAKE)$(RELPATH)/Test/GUI/wxWrapper/toolbarimages/*.xpm $(prefix)/share/lbdmf/toolbarimages
@@ -1815,22 +1826,22 @@ install-strip:
 	for sub_target in $(ALLDIRS); do \
 		$(MAKE) -C $$sub_target install-strip; \
 	done
-	echo mkdir -p $(prefix)/lib
-	mkdir -p $(prefix)/share
-	mkdir -p $(prefix)/share/lbdmf
-	mkdir -p $(prefix)/share/applications
-	mkdir -p $(prefix)/share/lbdmf/toolbarimages
-	mkdir -p $(prefix)/share/lbdmf/UMLSamples
-	mkdir -p $(prefix)/share/lbdmf/Doc
-	mkdir -p $(prefix)/share/lbdmf/include
-	mkdir -p $(prefix)/share/lbdmf/XMIToDMF
-	mkdir -p $(prefix)/share/lbdmf/DMFToXMI
-	mkdir -p $(prefix)/share/lbdmf/database
-	mkdir -p $(prefix)/share/lbdmf/TurboVision
-	mkdir -p $(prefix)/share/lbdmf/wxLua
-	mkdir -p $(prefix)/share/lbdmf/wxActiveRecords
-	mkdir -p $(prefix)/share/lbdmf/lbDMFDataViewModel
-	mkdir -p $(prefix)/share/lbdmf/lbDMFFixedFormular
+	echo $(MKDIR) -p $(prefix)/lib
+	$(MKDIR) -p $(prefix)/share
+	$(MKDIR) -p $(prefix)/share/lbdmf
+	$(MKDIR) -p $(prefix)/share/applications
+	$(MKDIR) -p $(prefix)/share/lbdmf/toolbarimages
+	$(MKDIR) -p $(prefix)/share/lbdmf/UMLSamples
+	$(MKDIR) -p $(prefix)/share/lbdmf/Doc
+	$(MKDIR) -p $(prefix)/share/lbdmf/include
+	$(MKDIR) -p $(prefix)/share/lbdmf/XMIToDMF
+	$(MKDIR) -p $(prefix)/share/lbdmf/DMFToXMI
+	$(MKDIR) -p $(prefix)/share/lbdmf/database
+	$(MKDIR) -p $(prefix)/share/lbdmf/TurboVision
+	$(MKDIR) -p $(prefix)/share/lbdmf/wxLua
+	$(MKDIR) -p $(prefix)/share/lbdmf/wxActiveRecords
+	$(MKDIR) -p $(prefix)/share/lbdmf/lbDMFDataViewModel
+	$(MKDIR) -p $(prefix)/share/lbdmf/lbDMFFixedFormular
 	cp $(DEVROOT_MAKE)$(RELPATH)/Database/*.sql $(prefix)/share/lbdmf/database
 	cp $(DEVROOT_MAKE)$(RELPATH)/Test/GUI/wxWrapper/toolbarimages/*.png $(prefix)/share/lbdmf/toolbarimages
 	cp $(DEVROOT_MAKE)$(RELPATH)/Test/GUI/wxWrapper/toolbarimages/*.xpm $(prefix)/share/lbdmf/toolbarimages
@@ -1859,37 +1870,37 @@ test-ldd:
 	./copy-wxGTK-libs.sh $(prefix)
 
 ../../bin:
-	-mkdir ../../bin
+	$(MKDIR) ..$(PATH_SEP)..$(PATH_SEP)bin
 	
 ../../lib:
-	-mkdir ../../lib
+	$(MKDIR) ..$(PATH_SEP)..$(PATH_SEP)lib
 
 ../../dll:
-	-mkdir ../../dll
+	$(MKDIR) ..$(PATH_SEP)..$(PATH_SEP)dll
 
 ../../dll/libs: ../../dll
-	-mkdir ../../dll/libs
+	$(MKDIR) ..$(PATH_SEP)..$(PATH_SEP)dll$(PATH_SEP)libs
 
 ../../plugins:
-	-mkdir ../../plugins
+	$(MKDIR) ..$(PATH_SEP)..$(PATH_SEP)plugins
 
 ../../plugins/libs: ../../plugins
-	-mkdir ../../plugins/libs
+	-$(MKDIR) ..$(PATH_SEP)..$(PATH_SEP)plugins$(PATH_SEP)libs
 
 $(prefix)/Library:
-	-mkdir -p $@
+	-$(MKDIR) -p $@
 
 $(prefix)/Library/Frameworks:
-	-mkdir -p $@
+	-$(MKDIR) -p $@
 
 $(prefix)/bin:
-	-mkdir -p $@
+	-$(MKDIR) -p $@
 
 $(prefix)/lib:
-	-mkdir -p $@
+	-$(MKDIR) -p $@
 
 $(prefix)/plugins:
-	-mkdir -p $@
+	-$(MKDIR) -p $@
 
 clean:
 	@for d in $(ALLDIRS); do \
