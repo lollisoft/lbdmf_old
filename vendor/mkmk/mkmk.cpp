@@ -1225,6 +1225,24 @@ testmingw.exe: test.o
   printf("\t\t@g++ -Wl,--enable-auto-import -o $(PROGRAM).exe $(OBJS) $(MINGWLIBS)\n");
   printf("\t\t@$(CP) $(PROGRAM).exe $(EXEDIR) > null\n");
 #endif
+
+#ifdef __MINGW32__
+  char* ModName = strdup(modulename);
+  char** array;
+  int count = split('.', ModName, &array);
+#ifdef muster
+testmingw.exe: test.o
+                rm testdll.lib
+                g++ -o testmingw.exe test.o -L. -ltestdll
+#endif
+
+  printf("PROGRAM=%s\n", ModName);
+
+  printf("\n%s.exe: $(OBJS)\n", ModName);
+
+  printf("\t\t@g++ -Wl,--enable-auto-import -o $(PROGRAM).exe $(OBJS) $(MINGWLIBS)\n");
+  printf("\t\t@$(CP) $(PROGRAM).exe $(EXEDIR) > null\n");
+#endif
 }
 /*...e*/
 /*...svoid writeLexTarget\40\char\42\ modulename\41\:0:*/
@@ -1649,6 +1667,28 @@ void write_clean(char* modulename = NULL) {
     printf("\t\t-@rm *.pch\n");
     printf("\t\t-@rm *.pdb\n");
 #endif
+    if (modulename == NULL) {
+        printf("\t\t-@rm *.dll\n");
+    } else {
+        printf("\t\t-@rm %s.exe\n", modulename);
+    }
+
+    // Write the distclean rule
+    printf("distclean:\n");
+    printf("\t\t-@rm *.o\n");
+    printf("\t\t-@rm makefile\n");
+    printf("\t\t-@rm *.log\n");
+    if (modulename == NULL) {
+        printf("\t\t-@rm *.so.*\n");
+    } else {
+        printf("\t\t-@rm %s\n", modulename);
+    }
+#endif //__WATCOMC__
+#ifdef __MINGW32__
+    // Write the normal clean rule
+    printf("clean:\n");
+    printf("\t\t-@rm *.exp *.err *.ilk *.lib *.lk1 *.mk1 *.map *.mk *.mk1 *.sym *.obj *.o *.idb *.pch *.pdb\n");
+    printf("\t\t-@rm -f *.bak\n");
     if (modulename == NULL) {
         printf("\t\t-@rm *.dll\n");
     } else {
