@@ -4,6 +4,7 @@ OBJDEP=../dosdir/match.o ../dosdir/dosdir.o
 
 ifeq ($(OSTYPE), Windows_NT)
 MOD_INCL=$(STD_INCL) -i=..\dosdir
+MOD_INCL_MINGW_CPP = $(STD_INCL_MINGW_CPP) -I.
 
 # use global setup
 COMPILER=WATCOM
