@@ -1352,6 +1352,69 @@ void writeMinGWDllTarget(char* modulename) {
   printf("endif\n");
 #endif
 
+#ifdef __MINGW32__
+  char* ModName = strdup(modulename);
+  char** array;
+  int count = split('.', ModName, &array);
+
+  printf("FILE = FIL\n");
+  printf("FILE += $(OBJLIST)\n");
+  printf("LNK=%s.lnk\n", ModName);
+  printf("ifeq ($(COMPILER), WATCOM)\n");
+  printf("LINKFLAGS=@%s.lnk\n", targetname);
+  printf("endif\n");
+  printf("ifeq ($(COMPILER), MICROSOFT)\n");
+  printf("LINKFLAGS=$(OBJS) $(VENDORLIBS) $(LIBS)\n");
+  printf("endif\n");
+  printf("PROGRAM=%s\n", ModName);
+
+  printf("ifeq ($(COMPILER), WATCOM)\n");
+
+  printf("\n%s.dll: $(OBJS) %s.dll.lnk\n", ModName, ModName);
+  printf("\t\t@echo Link %s.dll\n", ModName);
+
+  printf("\t\t@cmd /C if NOT \"$(LIBS)\" == \"\" echo LIBR $(LIBS) >> $@.lnk\n");
+
+  //printf("\t\t@$(CPPMINGW) -Wl,--kill-at,--output-def=$(PROGRAM).def -shared -o $(PROGRAM).dll $(OBJS) $(MINGWLIBS)\n");
+  printf("\t\t@$(CPPMINGW) -fPIC -shared -Wl,--enable-auto-import -Wl,--subsystem,windows -mthreads -mwindows -Wl,--out-implib=$(PROGRAM).a -o $(PROGRAM).dll $(OBJS) $(MINGWLIBS)\n");
+  //printf("\t\t@wlib -q -n -b $(PROGRAM).lib +$(PROGRAM).dll\n");
+  printf("\t\t@$(CP) $(PROGRAM).dll $(DLLDIR) > null\n");
+  printf("\t\t@$(CP) $(PROGRAM).a $(DLLLIBDIR) > null\n");
+  printf("\t\t@$(POST_PROCESS) \n");
+
+/*
+  printf("\t\t\n");
+
+  printf("%s.dll.lnk: makefile\n", ModName);
+
+  printf("\t\t@echo NAME $(PROGRAM).dll > $(LNK)\n");
+  printf("\t\t@echo FIL { $(OBJS) } >> $@\n");
+
+  printf("\t\t@cmd /C \"doit >> %s.lnk\"\n", targetname);
+  printf("\t\t@cmd /C \"rm doit.bat\"\n");
+  printf("\t\t-@cmd /C \"attrib -r *.bak\"\n");
+
+  printf("\t\t@echo @rem Nothing > doit.bat\n");
+  printf("\t\t@echo @if NOT \\\"$(LIBS)\\\" == \\\"\\\" echo LIBR $(LIBS) > doit.bat\n");
+*/
+
+  printf("endif\n");
+
+  printf("ifeq ($(COMPILER), MICROSOFT)\n");
+  printf("\n%s.dll: $(OBJS)\n", ModName);
+  printf("\t\t@echo Link %s.dll\n", ModName);
+  printf("\t\t@echo NAME $(PROGRAM).dll > $(LNK)\n");
+  printf("\t\t@echo $(FILE) $(LIBS) >> $(LNK)\n");
+// Don know, why this doesn't work now ??
+//  printf("\t\t@;if NOT \"$(LIBS)\" == \"\" echo LIBR $(LIBS) >> $(LNK)\n");
+  printf("\t\t@$(LINK) $(LNKDLLOPS) $(LINKFLAGS)\n");
+// Hack for copy not found ??
+  printf("\t\t$(CP) $(PROGRAM).dll $(DLLDIR) > null\n");
+  printf("\t\t$(CP) $(PROGRAM).lib $(DLLLIBDIR) > null\n");
+  printf("\t\t@$(POST_PROCESS) \n");
+  printf("endif\n");
+#endif
+
 #ifdef UNIX
   printf("install:\n");
   printf("\t\t$(INSTALL_PROGRAM) %s $(libdir)\n", modulename);
