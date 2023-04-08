@@ -89,7 +89,7 @@
 #  define DD_ISARCH(m)   (0)
 #endif /* ?MSDOS */
 
-#if (defined(UNIX) || defined(VMS))
+#if (defined(UNIX) || defined(VMS) || defined(__MINGW32__))
 #  include <errno.h>
 #  ifndef ENOENT
 #    define ENOENT -1
@@ -97,7 +97,7 @@
 #  ifndef ENMFILE
 #    define ENMFILE ENOENT
 #  endif
-#endif /* ?UNIX/VMS */
+#endif /* ?UNIX/VMS/__MINGW32__ */
 
 /* flags used by fnsplit */
 
