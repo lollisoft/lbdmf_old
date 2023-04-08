@@ -935,9 +935,9 @@
 #.PHONY: dummy
 
 ifeq ($(CRUISECONTROL), yes)
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 else
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 
 
@@ -1909,7 +1909,7 @@ mkrelease:
 	@for d in $(ALLDIRS); do \
 	    $(MAKE) -C $$d clean || exit $? ; \
 	done
-	cd ../..; tar cvzf lbDMF-0.3.2.3.tgz CPP; cd CPP/BaseDevelopment
+	cd ../..; tar cvzf lbDMF-0.3.2.3.tgz $(PROJECT_BASE); cd $(PROJECT_BASE)/BaseDevelopment
 
 #	Doesn't compile yet under linux
 #	lbPluginManager \

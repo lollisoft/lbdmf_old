@@ -46,6 +46,7 @@ if "%2"=="JENKINS" goto JENKINSBUILD:
 
 if "%COMPUTERNAME%"=="ANAKIN" goto NODIST:
 if "%COMPUTERNAME%"=="T43" goto NODIST:
+if "%COMPUTERNAME%"=="DESKTOP-D1P98N4" goto NODIST:
 
 goto DISTMODE:
 
@@ -54,6 +55,7 @@ goto DISTMODE:
 set DEVLW=q:
 set BASE=develop
 set BASE_MAKE=develop
+set PROJECT_BASE=lbdmf
 
 set DEVROOT=%DEVLW%\%BASE%
 set DEVROOT_MAKE=%DEVLW%/%BASE_MAKE%
@@ -145,7 +147,7 @@ set MINGWBIN=%DEVLW%\%BASE%\Tools\mingw\bin;
 
 rem Some dll and bin search Paths
 set DLLROOT=%RUNROOT%\dll
-set BINROOT=%RUNROOT%\bin;%RUNROOT%\CPP\bin
+set BINROOT=%RUNROOT%\bin;%RUNROOT%\%PROJECT_BASE%\bin
 
 set Path=%DEVLW%\%BASE%\bin;%SystemRoot%\system32;%DEVLW%\;%WATBIN%;%DEVBIN%;%DLLROOT%;%BINROOT%
 set Path=%Path%;q:\develop\tools\cygwin\bin;Q:\develop\Tools\Perl\bin;G:\gs\gs8.15\bin
@@ -155,7 +157,7 @@ set Path=%path%;G:\FPC\2.0.4\bin\i386-win32;C:\Programme\Graphviz2.26.3\bin
 set Path=%Path%;%MINGWBIN%
 
 rem Enable my Power++ IDE
-set Path=%Path%;"E:\Program Files\Powersoft\Power21\System"
+rem set Path=%Path%;"E:\Program Files\Powersoft\Power21\System"
 
 rem Bakefile binary
 set Path=%Path%;Q:\develop\Tools\Bakefile
@@ -183,7 +185,7 @@ SET EDPath=%DEVLW%\%BASE%\Tools\WATCOM\EDDAT
 
 @rem XML Module Configuration
 
-set LBHOSTCFGFILE=%DEVLW%\%BASE%\Projects\CPP\Test\Console\XML\lbXMLConfig.xml
+set LBHOSTCFGFILE=%DEVLW%\%BASE%\Projects\%PROJECT_BASE%\Test\Console\XML\lbXMLConfig.xml
 
 REM __stdcall convention
 set LBXMLFUNCTOR=_getlbDOMConfigInstance@16
@@ -217,10 +219,10 @@ REM This stuff is related to integrate the ACE libraries from
 REM http://www.cs.wustl.edu/~schmidt/ACE.html
 REM ------------------------------------------------------------
 
-set ACE_ROOT=%DEVROOT_MAKE%/Projects/CPP/vendor/ACE_wrappers
+set ACE_ROOT=%DEVROOT_MAKE%/Projects/%PROJECT_BASE%/vendor/ACE_wrappers
 set MPC_ROOT=%ACE_ROOT%/MPC
 
-set PATH=%PATH%;%DEVROOT%\Projects\CPP\vendor\ACE_wrappers\lib
+set PATH=%PATH%;%DEVROOT%\Projects\%PROJECT_BASE%\vendor\ACE_wrappers\lib
 
 REM -------------------
 REM GCC-XML Location
@@ -232,7 +234,7 @@ REM -------------------
 REM Beaver Debugger
 REM -------------------
 
-set PATH=%PATH%;"C:\Programme\Beaver Debugger\"
+rem set PATH=%PATH%;"C:\Programme\Beaver Debugger\"
 
 REM -------------------
 REM MSYS Path

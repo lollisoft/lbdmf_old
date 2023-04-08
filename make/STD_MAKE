@@ -611,11 +611,11 @@
 
 ifeq ($(OSTYPE), Windows_NT)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH_MAKE=/Projects/CPP
-RELPATH=\\Projects\\CPP
+RELPATH_MAKE=/Projects$(PROJECT_BASE)
+RELPATH=\\Projects\\$(PROJECT_BASE)
 else
-RELPATH_MAKE=/Projects/CPP
-RELPATH=\\Projects\\CPP
+RELPATH_MAKE=/Projects/$(PROJECT_BASE)
+RELPATH=\\Projects\\$(PROJECT_BASE)
 endif
 endif
 
@@ -623,17 +623,17 @@ ifeq ($(OSTYPE), Cross_OW)
 ifeq ($(CRUISECONTROL), yes)
 RELPATH=
 else
-RELPATH_MAKE=/Projects/CPP
-RELPATH=/Projects/CPP
+RELPATH_MAKE=/Projects/$(PROJECT_BASE)
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 endif
 
 ifeq ($(OSTYPE), linux)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 else
-RELPATH_MAKE=/Projects/CPP
-RELPATH=/Projects/CPP
+RELPATH_MAKE=/Projects/$(PROJECT_BASE)
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 endif
 
@@ -641,18 +641,18 @@ ifeq ($(OSTYPE), solaris)
 ifeq ($(CRUISECONTROL), yes)
 RELPATH=
 else
-RELPATH_MAKE=/Projects/CPP
-RELPATH=/Projects/CPP
+RELPATH_MAKE=/Projects/$(PROJECT_BASE)
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 endif
 
 ifeq ($(OSTYPE), osx)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH_MAKE=/Projects/CPP
-RELPATH=/Projects/CPP
+RELPATH_MAKE=/Projects/$(PROJECT_BASE)
+RELPATH=/Projects/$(PROJECT_BASE)
 else
-RELPATH_MAKE=/Projects/CPP
-RELPATH=/Projects/CPP
+RELPATH_MAKE=/Projects/$(PROJECT_BASE)
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 endif
 
@@ -1528,7 +1528,7 @@ DEBUG_MEMORY_TYPE=mpatrol
 
 ifeq ($(DEBUG_MEMORY), yes)
 ifeq ($(DEBUG_MEMORY_TYPE), mpatrol)
-INCLDEBUGMEM= -I $(DEVROOT)/Projects/CPP/vendor/mpatrol/src
+INCLDEBUGMEM= -I $(DEVROOT)/Projects/$(PROJECT_BASE)/vendor/mpatrol/src
 endif
 endif
 

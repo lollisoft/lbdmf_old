@@ -2,11 +2,11 @@
 
 ifeq ($(OSTYPE), Windows_NT)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH_MAKE=\Projects\CPP
-RELPATH=//Projects//CPP
+RELPATH_MAKE=\Projects\$(PROJECT_BASE)
+RELPATH=//Projects//$(PROJECT_BASE)
 else
-RELPATH_MAKE=\Projects\CPP
-RELPATH=//Projects//CPP
+RELPATH_MAKE=\Projects\$(PROJECT_BASE)
+RELPATH=//Projects//$(PROJECT_BASE)
 endif
 
 include $(DEVROOT_MAKE)$(RELPATH_MAKE)/make/STD_MAKE
@@ -19,36 +19,36 @@ endif
 
 ifeq ($(OSTYPE), linux-debian-ppc)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 else
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 include $(DEVROOT)$(RELPATH)/make/STD_MAKE
 endif
 
 ifeq ($(OSTYPE), solaris)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 else
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 include $(DEVROOT)$(RELPATH)/make/STD_MAKE
 endif
 
 ifeq ($(OSTYPE), linux)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 else
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 include $(DEVROOT)$(RELPATH)/make/STD_MAKE
 endif
 
 ifeq ($(OSTYPE), osx)
 ifeq ($(CRUISECONTROL), yes)
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 else
-RELPATH=/Projects/CPP
+RELPATH=/Projects/$(PROJECT_BASE)
 endif
 include $(DEVROOT)$(RELPATH)/make/STD_MAKE
 endif
